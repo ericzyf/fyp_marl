@@ -18,6 +18,7 @@ EPISODE_MAX_STEP = 100
 def train_episode(model):
     env = FormCircle(GRID_WIDTH, GRID_HEIGHT, CIRCLE_RADIUS, AGENT_NUM)
     env.init_agents()
+    env.find_target_center()
 
     # load q table from model
     for i in range(AGENT_NUM):

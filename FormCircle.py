@@ -28,11 +28,11 @@ class FormCircle:
         return np.array([np.mean(x), np.mean(y)])
 
 
-    def target_center(self):
+    def find_target_center(self):
         c = self.center()
         x = np.clip(c[0], self.radius, self.height - self.radius)
         y = np.clip(c[1], self.radius, self.width - self.radius)
-        return np.array([x, y])
+        self.target_center = np.array([x, y])
 
 
     def agent_displacements(self, base_pos):
@@ -40,13 +40,13 @@ class FormCircle:
 
 
     def distance_reward(self, agent_id):
-        d = self.agents[agent_id].position - self.target_center()
+        d = self.agents[agent_id].position - self.target_center
         dist = math.hypot(d[0], d[1])
         return abs(dist - self.radius)
 
 
     def uniformity_reward(self):
-        d = self.agent_displacements(self.target_center())
+        d = self.agent_displacements(self.target_center)
         dx = np.stack([v[0] for v in d])
         dy = np.stack([v[1] for v in d])
 
