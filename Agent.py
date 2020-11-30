@@ -64,3 +64,19 @@ class Agent:
         if dest[0] >= 0 and dest[0] < self.environment.height and dest[1] >= 0 and dest[1] < self.environment.width:
             return self.environment.grid[dest[0]][dest[1]] < 1.0
         return False
+
+
+    def available_actions(self):
+        actions = []
+        for i in range(len(Agent.actions)):
+            if self.check_action_availability(i):
+                actions.append(i)
+        return actions
+
+
+    def max_q(self):
+        q = self.Q[self.position[0]][self.position[1]][0]
+        actions = self.available_actions()
+        for act in actions:
+            q = max(q, self.Q[self.position[0]][self.position[1]][act])
+        return q

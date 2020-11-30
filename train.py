@@ -30,7 +30,7 @@ def train_episode(model):
             action_id = agent.choose_action()
             original_position = agent.position.copy()
             agent.take_action(action_id)
-            agent.Q[original_position[0]][original_position[1]][action_id] += ALPHA * (env.reward(agent.id) + GAMMA * np.amax(agent.Q[agent.position[0]][agent.position[1]]) - agent.Q[original_position[0]][original_position[1]][action_id])
+            agent.Q[original_position[0]][original_position[1]][action_id] += ALPHA * (env.reward(agent.id) + GAMMA * agent.max_q() - agent.Q[original_position[0]][original_position[1]][action_id])
 
     # return model
     return np.stack([agent.Q for agent in env.agents])
