@@ -73,4 +73,4 @@ class FormCircle:
     def reward(self, agent_id):
         u = self.uniformity_reward()[agent_id]
         d = self.distance_reward(agent_id)
-        return -(u ** (1 + d / math.hypot(self.width, self.height)))
+        return -(u ** (1 + d / math.hypot(self.width, self.height))) - 1.0
